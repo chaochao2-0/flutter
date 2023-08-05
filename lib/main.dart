@@ -53,33 +53,18 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     // 在flutter中，每个控件，都是一个类，它可以省略new关键字
-    return Scaffold(
+    return DefaultTabController(length: 3, child: Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(widget.title),
         centerTitle: true,
         // 右侧行为按钮
         actions: <Widget>[
-          IconButton(onPressed: () {}, icon: Icon(Icons.search))
+          IconButton(onPressed: () {}, icon: const Icon(Icons.search))
         ]
       ),
       body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
         child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             const Text(
@@ -115,11 +100,24 @@ class _MyHomePageState extends State<MyHomePage> {
           ]
         )
       ),
+      bottomNavigationBar: Container(
+        decoration: const BoxDecoration(color: Colors.black),
+        height: 50,
+        child: const TabBar(
+          labelStyle: TextStyle(height: 0, fontSize: 10),
+          tabs: <Widget>[
+            Tab(icon: Icon(Icons.movie_filter), text: '正在热映'),
+            Tab(icon: Icon(Icons.movie_creation), text: '即将上映'),
+            Tab(icon: Icon(Icons.local_movies), text: 'Top250'),
+          ]
+        )
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
+    )
     );
   }
 }
